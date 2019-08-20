@@ -3,6 +3,7 @@ import axios from 'axios'
 
 
 class Login extends React.Component {
+    
     state = {
         credentials: {
             username: '',
@@ -20,16 +21,20 @@ class Login extends React.Component {
         })
     }
 
+
     handleSubmit = e => {
         e.preventDefault();
         axios
             .post('http://localhost:5000/api/login', this.state.credentials)
-            .then(res => 
-                console.log(res))
+            .then(res => {
+                localStorage.setItem("token", res.data.payload)
+                // console.log('props', this.props)
+                this.props.history.push("./friendlist")
+            })
             .catch(err => console.log(err.response))
     }
 
-
+    
     render(){
         console.log('credentials', this.state.credentials)
         return (
