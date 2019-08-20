@@ -8,7 +8,7 @@ const PrivateRoute = ({component: Component, ...rest}) => {
     //     exact: props.exact,
     //     path:props.path,
     //     render: props.render
-    }
+    
     return (
         <Route
         {...rest}
