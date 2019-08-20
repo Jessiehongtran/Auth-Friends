@@ -1,5 +1,6 @@
 import React from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth'
+import AddFriend from './AddFriend'
 
 class Friendlist extends React.Component {
     state = {
@@ -30,8 +31,10 @@ class Friendlist extends React.Component {
                         <h3>Name: {friend.name}</h3>
                         <p>Email: {friend.email}</p>
                         <p>Age: {friend.age}</p>
+                      
                     </div>
                 ))}
+                  <AddFriend />
             </div>
         )
     }
