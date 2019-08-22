@@ -16,10 +16,17 @@ const Login = (props) => {
         axios
         .post('http://localhost:5000/api/login', user)
         .then(res => {
-            console.log(res.data.payload)
-            // localStorage.getItem('token', res.data.payload)
+            console.log(res.data)
+            localStorage.getItem('token', res.data.payload)
+            console.log(props)
+            props.history.push('/friends')
         })
-        .catch(err => console.log('err',err.response))
+        .catch(error => { if (!error.response) {
+            console.log("Please check your internet connection.");
+        }
+
+        return Promise.reject(error)
+    })
 
 
     }
