@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 
 const AddFriend = (props) => {
     console.log('props in AddFriend', props)
-    const [newFriend, setNewFriend] = useState({name: '', age: '', email: ''})
+    const [newFriend, setNewFriend] = useState(props.initialValue || {name: '', age: '', email: ''})
 
     const handleChange = event => {
         setNewFriend({
@@ -13,7 +13,7 @@ const AddFriend = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault() ;
-        props.toAdd(newFriend)
+        props.submitFriend(newFriend)
     }
 
     return (
