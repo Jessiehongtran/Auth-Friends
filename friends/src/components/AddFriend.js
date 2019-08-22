@@ -5,38 +5,44 @@ class AddFriend extends React.Component {
     state= {
         newFriend : {
             
-            name: '',
-            age: '',
-            email: '',
+            name: "",
+            age: "",
+            email: "",
             
         }
     }
 
     handleChange = e => {
-        this.setState({
-            newFriend: {
+        console.log('e',e)
+        this.setState(
+            {newFriend: {
                 ...this.state.newFriend,
-                [e.target.name]: e.target.value
+                [e.target.name]: 
+                e.target.value
             }
-        })
+            }
+            )
     }
 
     handleSubmit = e => {
         e.prevenDefault();
-        axios
-        .post('http://localhost:5000/api/friends', this.state.newFriend)
-        .then(res=> console.log('newfiend', res))
-        .catch(err => console.log(err.response))
+        this.props.addData(this.state.newFriend)
+        // axios
+        // .post('http://localhost:5000/api/friends', this.state.newFriend)
+        // .then(res=> console.log('newfiend', res))
+        // .catch(err => console.log(err.response))
     }
 
     render() {
         return (
-            <form onSubmit = {this.handleSubmit}>
+            
+            <form onSubmit={this.handleSubmit}>
+
                 <input 
                 type="text"
                 placeholder="name"
                 name="name"
-                value={this.state.newFriend.name}
+                value={this.state.name}
                 onChange={this.handleChange}
                 />
 
@@ -44,7 +50,7 @@ class AddFriend extends React.Component {
                 type="text"
                 placeholder="age"
                 name="age"
-                value={this.state.newFriend.age}
+                value={this.state.age}
                 onChange={this.handleChange}
                 />
 
@@ -52,10 +58,10 @@ class AddFriend extends React.Component {
                 type="text"
                 placeholder="email"
                 name="email"
-                value={this.state.newFriend.email}
+                value={this.state.email}
                 onChange={this.handleChange}
                 />
-                <button>Add</button>
+                <button type="submit">Add</button>
             </form>
         )
     }

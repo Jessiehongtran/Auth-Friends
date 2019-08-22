@@ -22,6 +22,13 @@ class Friendlist extends React.Component {
             )
         .catch(err => console.log(err.response))
     }
+
+    addFriend = friend => {
+        axiosWithAuth()
+        .post('http://localhost:5000/api/friends', friend)
+        .then(res => console.log(res))
+        .catch(err => console.log(err.response))
+    }
     render(){
         console.log('friendList', this.state.friendList)
         return (
@@ -31,10 +38,10 @@ class Friendlist extends React.Component {
                         <h3>Name: {friend.name}</h3>
                         <p>Email: {friend.email}</p>
                         <p>Age: {friend.age}</p>
-                      
+                       
                     </div>
                 ))}
-                  <AddFriend />
+                <AddFriend addData={this.addData}/> 
             </div>
         )
     }
