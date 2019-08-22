@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import axios from 'axios'
 
 
-const Login = () => {
+const Login = (props) => {
+    console.log('props in Login', props)
     const [user, setUser] = useState({username: "", password: ""})
 
     const handleChange = event => {
@@ -15,9 +16,10 @@ const Login = () => {
         axios
         .post('http://localhost:5000/api/login', user)
         .then(res => {
-            console.log(res)
+            console.log(res.data.payload)
+            // localStorage.getItem('token', res.data.payload)
         })
-        .catch(err => console.log(err.response))
+        .catch(err => console.log('err',err.response))
 
 
     }
