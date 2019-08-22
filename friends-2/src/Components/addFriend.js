@@ -43,7 +43,7 @@ const AddFriend = (props) => {
                 onChange={handleChange}
                 />
 
-                <button type="submit">Add</button>
+                <button type="submit">{props.button}</button>
             </form>
         </div>
     )

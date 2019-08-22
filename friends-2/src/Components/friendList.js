@@ -70,22 +70,27 @@ const FriendList = () => {
         .catch(err => console.log(err.response))
 
     }
+
+    const Add = 'Add'
+
+    const Edit= 'Edit'
     
     
 
     return (
         <div>
             <h2>Friends</h2>
-            <Route exact path="/friends/" render= {props => <AddFriend {...props} submitFriend = {toAdd}/>} />
-
+            
             {friends.map( friend => 
             <FriendCard key={friend.id} friend={friend} toDelete={toDelete}/>
             )}
 
+            <Route exact path="/friends/" render= {props => <AddFriend {...props} submitFriend = {toAdd} button={Add}/>} /> 
+
             <Route path= "/friends/edit/:id" render={props => {
             console.log('params', props)
             const currentFriend = friends.find(friend => friend.id == props.match.params.id)
-            return <AddFriend {...props} submitFriend = {toEdit} initialValue={currentFriend}/> 
+            return <AddFriend {...props} submitFriend = {toEdit} initialValue={currentFriend} button={Edit}/> 
         
             }
             }
