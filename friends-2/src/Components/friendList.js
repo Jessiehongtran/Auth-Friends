@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 import AddFriend from './addFriend'
+import FriendCard from './friendCard'
 
 const FriendList = () => {
     const [friends, setFriends]= useState([])
@@ -30,15 +31,33 @@ const FriendList = () => {
         .catch(err => console.log(err.response))
     }
 
+    const toDelete = id => {
+        console.log('id:', id)
+        Axios
+        .get(`http://localhost:5000/api/friends/`, {
+            headers: {
+                Authorization: localStorage.getItem('token')}
+        })
+        .then(res => {
+            console.log('friendList', res.data)
+            console.log('here', res.data.filter(filteredFriend => filteredFriend.id!==id))
+            setFriends(res.data.filter(filteredFriend => filteredFriend.id!==id))
+            
+        })
+        .catch(err=> console.log(err.response))
+    }
+
+    
     
 
     return (
         <div>
             <h2>Friends</h2>
-            {friends.map( friend => 
-            <div key={friend.id}>{friend.name}</div>
-            )}
             <AddFriend toAdd = {toAdd}/>
+
+            {friends.map( friend => 
+            <FriendCard key={friend.id} friend={friend} toDelete={toDelete}/>
+            )}
         </div>
     )
 }
