@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 import AddFriend from './addFriend'
 import FriendCard from './friendCard'
-import {Route} from 'react-router-dom'
+import {Route, Redirect} from 'react-router-dom'
 
 const FriendList = () => {
     const [friends, setFriends]= useState([])
@@ -66,6 +66,8 @@ const FriendList = () => {
         })
         .then(res => {
             setFriends(res.data)
+            // console.log('props in toEdit', props)
+            // props.history.push('/friends')
         })
         .catch(err => console.log(err.response))
 
@@ -80,7 +82,7 @@ const FriendList = () => {
     return (
         <div>
             <h2>Friends</h2>
-            
+
             {friends.map( friend => 
             <FriendCard key={friend.id} friend={friend} toDelete={toDelete}/>
             )}
@@ -90,10 +92,11 @@ const FriendList = () => {
             <Route path= "/friends/edit/:id" render={props => {
             console.log('params', props)
             const currentFriend = friends.find(friend => friend.id == props.match.params.id)
+            if(!currentFriend) {
+                return <Redirect to='/friends' />}
             return <AddFriend {...props} submitFriend = {toEdit} initialValue={currentFriend} button={Edit}/> 
         
-            }
-            }
+            }}
             />
         </div>
     )
