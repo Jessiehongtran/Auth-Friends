@@ -13,7 +13,7 @@ const AddFriend = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault() ;
-        props.toAdd()
+        props.toAdd(newFriend)
     }
 
     return (

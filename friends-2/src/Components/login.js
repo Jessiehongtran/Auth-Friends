@@ -17,7 +17,7 @@ const Login = (props) => {
         .post('http://localhost:5000/api/login', user)
         .then(res => {
             console.log(res.data)
-            localStorage.getItem('token', res.data.payload)
+            localStorage.setItem('token', res.data.payload)
             console.log(props)
             props.history.push('/friends')
         })

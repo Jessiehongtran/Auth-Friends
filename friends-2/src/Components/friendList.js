@@ -9,7 +9,7 @@ const FriendList = () => {
         Axios
         .get('http://localhost:5000/api/friends', {
             headers: {
-                Authorization: localStorage.getItem("token")}
+                Authorization: localStorage.getItem('token')}
         })
         .then(res => {
             console.log('friends data', res)
@@ -20,9 +20,12 @@ const FriendList = () => {
 
     const toAdd = friend => {
         Axios
-        .post('http: //localhost:5000/api/friends', friend)
+        .post('http://localhost:5000/api/friends', friend, {
+            headers: {
+                Authorization: localStorage.getItem('token')}
+        })
         .then(res => {
-            console.log('toAdd data', res)
+            setFriends(res.data)
         })
         .catch(err => console.log(err.response))
     }
