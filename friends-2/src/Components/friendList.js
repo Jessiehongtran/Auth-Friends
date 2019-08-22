@@ -34,14 +34,24 @@ const FriendList = () => {
     const toDelete = id => {
         console.log('id:', id)
         Axios
-        .get(`http://localhost:5000/api/friends/`, {
+        // .get(`http://localhost:5000/api/friends/`, {
+        //     headers: {
+        //         Authorization: localStorage.getItem('token')}
+        // })
+        // .then(res => {
+        //     console.log('friendList', res.data)
+        //     console.log('here', res.data.filter(filteredFriend => filteredFriend.id!==id))
+        //     setFriends(res.data.filter(filteredFriend => filteredFriend.id!==id))
+            
+        // })
+        .delete(`http://localhost:5000/api/friends/${id}`, {
             headers: {
                 Authorization: localStorage.getItem('token')}
         })
         .then(res => {
-            console.log('friendList', res.data)
-            console.log('here', res.data.filter(filteredFriend => filteredFriend.id!==id))
-            setFriends(res.data.filter(filteredFriend => filteredFriend.id!==id))
+            console.log('certain friend', res.data)
+            setFriends(res.data)
+
             
         })
         .catch(err=> console.log(err.response))
